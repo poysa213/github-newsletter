@@ -14,7 +14,7 @@ interface Repository {
 }
 
 export async function GET (){
-  cronJob()
+  await cronJob()
   return NextResponse.json({"msg": "success"})
 }
 
@@ -45,7 +45,7 @@ const scrape = async (): Promise<Repository[]> => {
 
       if (linkElement) {
         const name = linkElement?.innerText.trim() || '';
-        const link = `https://github.com${linkElement.getAttribute('href')}` || '';
+        const link = `https://github.com${linkElement.getAttribute('href')}` ?? '';
         const description = descriptionElement?.innerText || '';
 
         repos.push({ name, link, description });

@@ -1,7 +1,5 @@
-import Link from "next/link";
-import { api } from "~/trpc/server";
 import  Subscribe from "~/app/_components/subscribe"
-import { scheduleCronJob } from "./utils/cronJob";
+
 
 export default async function Home() {
   return (
