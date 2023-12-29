@@ -20,7 +20,6 @@ export async function sendMail(subject:string, toEmail:string, htmlContent:strin
     if (error) {
       throw new Error(error);
     } else {
-      console.log("Email Sent");
       return true;
     }
   });

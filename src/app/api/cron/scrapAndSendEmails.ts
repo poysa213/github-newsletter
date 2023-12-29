@@ -1,7 +1,9 @@
 import puppeteer from "puppeteer";
 import { NextResponse } from 'next/server'
-
+import ejs from "ejs";
 import { PrismaClient } from '@prisma/client';
+import { sendMail } from "~/app/services/mailServices";
+import { reposEmailTemplate } from "~/app/utils/emailTemplate";
 
 const prisma = new PrismaClient();
 
@@ -22,7 +24,36 @@ const cronJob = async() => {
    const repos = await scrape();
    await prisma.repository.createMany({
     data: repos
-   })
+   });
+   const html = await ejs.render(reposEmailTemplate, {repos})
+   const todayIsAGoodDay = new Date();
+
+   let users = await prisma.subscriber.findMany()
+   users = users.filter((user)=> user.nextDay.getDate() === todayIsAGoodDay.getDate())
+   console.log(users)
+   for(const user of users){
+    await sendMail("Github-newsletter", user.email, html)
+    let nextDay = new Date();
+       switch(user.type){
+        case "DAILY":
+          nextDay.setDate(todayIsAGoodDay.getDate() + 1)
+          break;
+        case "WEEKLY":
+          nextDay.setDate(todayIsAGoodDay.getDate() + 7)
+          break;
+        case "MONTHLY":
+          nextDay.setDate(todayIsAGoodDay.getMonth() + 1)
+          break
+       }
+       await prisma.subscriber.update({
+        where:{
+          id: user.id
+        },
+        data:{
+          nextDay: nextDay
+        }
+       })
+   }
 }
 
 const scrape = async (): Promise<Repository[]> => {
@@ -51,7 +82,6 @@ const scrape = async (): Promise<Repository[]> => {
         repos.push({ name, link, description });
       }
     });
-    console.log(repos)
     return repos;
   });
 
