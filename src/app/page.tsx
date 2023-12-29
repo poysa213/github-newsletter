@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { api } from "~/trpc/server";
 import  Subscribe from "~/app/_components/subscribe"
-export default async function Home() {
-  const hello = await api.post.hello.query({ text: "from tRPC" });
+import { scheduleCronJob } from "./utils/cronJob";
 
+export default async function Home() {
   return (
     <main className="p-4 flex min-h-screen flex-col text-white items-center justify-center bg-violet-500">
       <h1 className="font-bold md:text-7xl text-4xl">Github News-Letter</h1>

@@ -18,6 +18,17 @@ export const newsletterRouter = createTRPCRouter({
           },
         });
       }),
+      addRepository: publicProcedure
+      .input(z.array(z.object({
+        name: z.string(),
+        link: z.string().url(),
+        description: z.string(),
+      })))
+      .mutation(async ({ ctx, input }) => {
+        return ctx.db.repository.createMany({
+          data: input
+        })
+      })
 
   });
   
