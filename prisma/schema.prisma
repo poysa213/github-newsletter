@@ -35,7 +35,7 @@ model Subscriber{
     id        Int      @id @default(autoincrement())
     email     String
     type      Type     @default(DAILY)
-    nextDay   DateTime
+    nextDay   DateTime @default(now())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 

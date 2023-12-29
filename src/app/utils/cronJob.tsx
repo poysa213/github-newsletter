@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 import { api } from "~/trpc/react";
 import cron from 'node-cron';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import ejs from "ejs";
 import { reposEmailTemplate } from "./emailTemplate";
 import { sendMail } from "../services/mailServices";
@@ -29,9 +29,33 @@ const cronJob = async() => {
     data: repos
    })
    const html = await ejs.render(reposEmailTemplate, {repos})
-   const users = await prisma.subscriber.findMany()
+   const todayIsAGoodDay = new Date();
+
+   let users = await prisma.subscriber.findMany()
+   users = users.filter((user)=> user.nextDay.getDate() === todayIsAGoodDay.getDate())
+   console.log(users)
    for(const user of users){
-    await sendMail("newsletter", user.email, html)
+    await sendMail("Github-newsletter", user.email, html)
+    let nextDay = new Date();
+       switch(user.type){
+        case "DAILY":
+          nextDay.setDate(todayIsAGoodDay.getDate() + 1)
+          break;
+        case "WEEKLY":
+          nextDay.setDate(todayIsAGoodDay.getDate() + 7)
+          break;
+        case "MONTHLY":
+          nextDay.setDate(todayIsAGoodDay.getMonth() + 1)
+          break
+       }
+       await prisma.subscriber.update({
+        where:{
+          id: user.id
+        },
+        data:{
+          nextDay: nextDay
+        }
+       })
    }
   
 }
