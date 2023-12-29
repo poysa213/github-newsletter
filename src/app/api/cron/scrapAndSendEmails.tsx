@@ -15,7 +15,7 @@ interface Repository {
 
 export async function GET (){
   await cronJob()
-  return NextResponse.json({"msg": "success"})
+  return NextResponse.json({status: 200})
 }
 
 const cronJob = async() => {
