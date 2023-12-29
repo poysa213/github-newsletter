@@ -6,15 +6,42 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
-model Post {
+model Repository {
     id        Int      @id @default(autoincrement())
-    name      String
+    name     String
+    link     String 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     @@index([name])
+}
+
+model Developer {
+    id        Int      @id @default(autoincrement())
+    name     String
+    link     String 
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([name])
+}
+
+model Subscriber{
+    id        Int      @id @default(autoincrement())
+    email     String?
+    type      Type     @default(DAILY)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([email])
+}
+
+enum Type{
+    DAILY
+    WEEKLY
+    MONTHLY
 }

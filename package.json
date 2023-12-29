@@ -14,17 +14,22 @@
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
+    "@radix-ui/react-icons": "^1.3.0",
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tanstack/react-query": "^4.36.1",
     "@trpc/client": "^10.43.6",
     "@trpc/next": "^10.43.6",
     "@trpc/react-query": "^10.43.6",
     "@trpc/server": "^10.43.6",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "next": "^14.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "server-only": "^0.0.1",
     "superjson": "^2.2.1",
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"
   },
   "devDependencies": {
