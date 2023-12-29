@@ -4,7 +4,7 @@ import { api } from "~/trpc/react";
 
 export default function Subscribe() {
   const [email, setEmail] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState("DAILY");
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +75,7 @@ export default function Subscribe() {
         type="submit"
         className={
           addSubscriber.isLoading
-            ? "h-10 w-52 my-2 rounded-md border-2 bg-white py-1 pr-2 text-violet-500 hover:bg-violet-500 hover:border-violet-500"
+            ? "h-10 w-52 my-2 rounded-md border-2 border-yellow-300 bg-yellow-300 py-1 pr-2 hover:border-yellow-300 hover:bg-violet-500"
             : "h-10 w-52 my-2 rounded-md border-2 border-yellow-300 bg-yellow-300 py-1 pr-2 hover:border-yellow-300 hover:bg-violet-500"
         }
       >
@@ -83,6 +83,8 @@ export default function Subscribe() {
           ? "Subscribing..."
           : isSuccess
           ? "Subscribed!"
+          : addSubscriber.isError?
+            "Error!"
           : "Subscribe"}
       </button>
     </form>

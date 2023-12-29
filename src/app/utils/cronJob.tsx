@@ -2,7 +2,9 @@ import puppeteer from "puppeteer";
 import { api } from "~/trpc/react";
 import cron from 'node-cron';
 import { PrismaClient } from '@prisma/client';
-
+import ejs from "ejs";
+import { reposEmailTemplate } from "./emailTemplate";
+import { sendMail } from "../services/mailServices";
 const prisma = new PrismaClient();
 
 
@@ -26,6 +28,12 @@ const cronJob = async() => {
    await prisma.repository.createMany({
     data: repos
    })
+   const html = await ejs.render(reposEmailTemplate, {repos})
+   const users = await prisma.subscriber.findMany()
+   for(const user of users){
+    await sendMail("newsletter", user.email, html)
+   }
+  
 }
 
 const scrape = async (): Promise<Repository[]> => {
