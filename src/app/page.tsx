@@ -1,9 +1,8 @@
 import  Subscribe from "~/app/_components/subscribe"
-import { scheduleCronJob } from "./utils/cronJob";
+
 
 
 export default async function Home() {
-  await scheduleCronJob()
   return (
     <main className="p-4 flex min-h-screen flex-col text-white items-center justify-center bg-violet-500">
       <h1 className="font-bold md:text-7xl text-4xl">Github News-Letter</h1>
