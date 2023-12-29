@@ -1,7 +1,7 @@
 {
     "crons": [
         {
-            "path": "/src/app/api/cron/scrapAndSendEmails",
+            "path": "/api/cron/scrapAndSendEmails",
             "schedule": "0 0 * * *"
         }
     ]
