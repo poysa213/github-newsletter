@@ -2,7 +2,7 @@
     "crons": [
         {
             "path": "/src/api/cron/scrapAndSendEmails",
-            "schedule": "*/1 * * * *"
+            "schedule": "0 0 * * *"
         }
     ]
 }
