@@ -1,10 +1,9 @@
-import puppeteer from "puppeteer";
+import puppeteer from 'puppeteer-core'
 import { NextResponse } from 'next/server'
 import ejs from "ejs";
 import { PrismaClient } from '@prisma/client';
 import { sendMail } from "~/app/services/mailServices";
 import { reposEmailTemplate } from "~/app/utils/emailTemplate";
-import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 
@@ -31,7 +30,7 @@ const cronJob = async() => {
 
    let users = await prisma.subscriber.findMany()
    users = users.filter((user)=> user.nextDay.getDate() === todayIsAGoodDay.getDate())
-   console.log(users)
+   
    for(const user of users){
     await sendMail("Github-newsletter", user.email, html)
     let nextDay = new Date();
@@ -58,9 +57,9 @@ const cronJob = async() => {
 }
 
 const scrape = async (): Promise<Repository[]> => {
-  const browser = await puppeteer.launch({
-    headless: true,
-  });
+    const browser = await puppeteer.connect({
+        browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`,
+      }) 
   const page = await browser.newPage();
 
   await page.goto("https://github.com/trending", {

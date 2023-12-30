@@ -67,3 +67,50 @@ export const reposEmailTemplate = `
 </body>
 </html>
 `
+
+export const successSubscriptionEmail = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Newsletter Subscription</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #555;
+      line-height: 1.6;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GitHub Newsletter Subscription</h1>
+    <p>Thank you for subscribing to the GitHub Newsletter. You're now part of our community, where you'll receive the latest updates on trending repositories and exciting GitHub news.</p>
+    <p>Explore more on GitHub: <a href="https://github.com/trending" target="_blank">https://github.com/trending</a></p>
+    <a href="https://github.com/poysa213">My github</a>
+  </div>
+</body>
+</html>
+`

@@ -30,7 +30,7 @@ export default function Subscribe() {
       <input
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="w-52 my-2 rounded-md border border-white bg-transparent px-2 py-2  text-base font-bold placeholder:text-sm placeholder:text-yellow-300 placeholder:text-opacity-90 focus:outline-none"
+        className="w-52 my-2 rounded-md border border-white bg-transparent px-2 py-2  text-base font-bold placeholder:text-sm placeholder:text-white placeholder:text-opacity-90 focus:outline-none"
         placeholder="email@domain.x"
         type="email"
         required

@@ -1,7 +1,7 @@
 import { z } from "zod";
-
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-
+import { sendMail } from "~/app/services/mailServices";
+import { successSubscriptionEmail } from "~/app/utils/emailTemplate";
 const types = ["DAILY", "WEEKLY", "MONTHLY"]
 
 export const newsletterRouter = createTRPCRouter({
@@ -23,7 +23,8 @@ export const newsletterRouter = createTRPCRouter({
           nextDay.setDate(todayIsAGoodDay.getMonth() + 1)
           break
        }
-        return ctx.db.subscriber.create({
+       await sendMail("Welcome to the GitHub Newsletter Community!", input.email, successSubscriptionEmail)
+        return await ctx.db.subscriber.create({
           data: {
             email: input.email,
             type: input.type as any,
