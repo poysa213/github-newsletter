@@ -4,18 +4,19 @@ import ejs from "ejs";
 import { PrismaClient } from '@prisma/client';
 import { sendMail } from "~/app/services/mailServices";
 import { reposEmailTemplate } from "~/app/utils/emailTemplate";
+import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 
 export const dynamic = 'force-dynamic';
-
+export const revalidate = 0;
 interface Repository {
   name: string;
   link: string;
   description: string;
 }
 
-export async function GET (){
+export async function GET (req: Request){
   await cronJob()
   return NextResponse.json({status: 200})
 }
