@@ -1,28 +1,23 @@
-# Create T3 App
+# T3 Stack GitHub Newsletter
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## Overview
 
-## What's next? How do I make an app with this?
+Built with the [T3 Stack](https://create.t3.gg/), the T3 Stack GitHub Newsletter is a simple web app designed to keep users informed about the latest GitHub trends. Users can subscribe to a newsletter with options for daily, weekly, or monthly updates. The app scrapes trending repositories from [GitHub Trending](https://github.com/trending) and sends out email newsletters to subscribers.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Features
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- **Newsletter Subscription:** Users can subscribe to newsletters with frequency options: Daily, Weekly, or Monthly.
+- **GitHub Trend Scraping:** Utilizes a scraper to fetch trending repositories from GitHub.
+- **Cron Jobs:** Scheduled jobs to periodically scrape GitHub trends and send newsletters to subscribers.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Usage
 
-## Learn More
+To explore the latest GitHub trends, subscribe to the newsletter at [GitHub-Newsletter](https://github-newsletter.vercel.app/).
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Contributing
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+Contributions are welcome! Feel free to open issues or pull requests for improvements and new features.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## License
 
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+This project is licensed under the [MIT License](LICENSE).
