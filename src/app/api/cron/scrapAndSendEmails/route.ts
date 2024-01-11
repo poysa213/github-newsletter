@@ -29,7 +29,7 @@ const cronJob = async() => {
    const todayIsAGoodDay = new Date();
 
    let users = await prisma.subscriber.findMany()
-   users = users.filter((user)=> user.nextDay.getDate() === todayIsAGoodDay.getDate())
+   users = users.filter((user)=> user.nextDay.getDate() <= todayIsAGoodDay.getDate())
    
    for(const user of users){
     await sendMail("Github-newsletter", user.email, html)
