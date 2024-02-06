@@ -39,7 +39,7 @@ const cronJob = async() => {
           nextDay.setDate(todayIsAGoodDay.getDate() + 1)
           break;
         case "WEEKLY":
-          nextDay.setDate(todayIsAGoodDay.getDate() + 7)
+          nextDay.setDate(todayIsAGoodDay.getDate() + 7)  
           break;
         case "MONTHLY":
           nextDay.setDate(todayIsAGoodDay.getMonth() + 1)

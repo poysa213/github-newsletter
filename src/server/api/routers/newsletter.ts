@@ -23,14 +23,25 @@ export const newsletterRouter = createTRPCRouter({
           nextDay.setDate(todayIsAGoodDay.getMonth() + 1)
           break
        }
-       await sendMail("Welcome to the GitHub Newsletter Community!", input.email, successSubscriptionEmail)
-        return await ctx.db.subscriber.create({
+       const subscribed = await ctx.db.subscriber.findFirst({ 
+        where:{
+          email: input.email
+        } 
+       })
+       if(subscribed){
+        return "ALready subscribed!"
+       }
+        const success =  await ctx.db.subscriber.create({
           data: {
             email: input.email,
             type: input.type as any,
             nextDay: nextDay,
           },
         });
+        if(success){
+          await sendMail("Welcome to the GitHub Newsletter Community!", input.email, successSubscriptionEmail)
+        }
+        return success;
       }),
       addRepository: publicProcedure
       .input(z.array(z.object({
